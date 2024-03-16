@@ -1,18 +1,18 @@
 const jwt = require('jsonwebtoken');
-const Customer = require('../models/customerModel');
+const Vendor = require('../models/vendorModel');
 
 const auth = async(req, res, next) => {
     try{
         const token = req.header('Authorisation'). replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const customer = await Customer.findOne({_id: decoded._id, 'tokens.token':token })
+        const vendor = await Vendor.findOne({_id: decoded._id, 'tokens.token':token })
 
-        if(!customer){
+        if(!vendor){
             throw new Error
         }
 
         req.token = token;
-        req.customer = customer;
+        req.vendor = vendor;
     next()
     } catch (error){
         res.status(401).send({error: "Authentication required"})

@@ -44,7 +44,7 @@ const customerSchema = new mongoose.Schema({
                 value.toLowerCase().includes('password')){
                     throw new Error('password cant contain the word password')
                 }
-            elif(
+            else if(
                 !validator.isAlphanumeric( value ))
                 {
                 throw new Error('Password must contain numbers and letters')
@@ -79,8 +79,8 @@ customerSchema.methods.generateAuthToken = async function(){
       const token = jwt.sign({
         _id: customer._id.toString()
       }, process.env.JWT_SECRET)
-      user.tokens = user.tokens.concat({token})
-      await user.save()
+      customer.tokens = customer.tokens.concat({token})
+      await customer.save()
 
       return token
 }
@@ -102,7 +102,7 @@ customerSchema.statics.findByCredentials = async(email, password) => {
 customerSchema.pre('save', async function(next){
     const customer = this
     if(customer.isModified('password')){
-        user.password = await bcrypt.hash(user.password, 8)
+        customer.password = await bcrypt.hash(customer.password, 8)
     }
     next()
 })

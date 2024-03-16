@@ -1,53 +1,17 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const express = require('express')
+const customerRouter = require('./routes/customerRoutes')
 
-require('dotenv').config();
+require('./db/mongoose')
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT
 
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+const app = express()
 
-//logging requests with morgan
-//app.use(morgan('tiny'));
-
-// Connect to MongoDB
-mongoose.connect(process.env.DATABASE_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  writeConcern: {
-    w: 'majority'
-  }
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});
-
-// Define routes
-const customerRoutes = require('./routes/customerRoutes');
-//const productRoutes = require('./routes/productRoutes');
-//const orderRoutes = require('./routes/orderRoutes');
-//const vendorRoutes = require('./routes/vendorRoutes');
-//const reviewRoutes = require('./routes/reviewRoutes');
+app.use(express.json())
+app.use(customerRouter)
 
 
-app.use('/api', customerRoutes);
-//app.use('/products', productRoutes);
-//app.use('/orders', orderRoutes);
-//app.use('/vendors', vendorRoutes);
-//app.use('/reviews', reviewRoutes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(port, () => {
+    console.log('server listening on port ' + port)
+})

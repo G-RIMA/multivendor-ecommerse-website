@@ -44,7 +44,7 @@ const vendorSchema = new mongoose.Schema({
                 value.toLowerCase().includes('password')){
                     throw new Error('password cant contain the word password')
                 }
-            elif(
+            else if(
                 !validator.isAlphanumeric( value ))
                 {
                 throw new Error('Password must contain numbers and letters')
@@ -72,6 +72,41 @@ const vendorSchema = new mongoose.Schema({
 {
     timestamps: true
 });
+
+//Generate authentication tokem
+vendorSchema.methods.generateAuthToken = async function(){
+    const vendor = this
+      const token = jwt.sign({
+        _id: vendor._id.toString()
+      }, process.env.JWT_SECRET)
+      vendor.tokens = user.tokens.concat({token})
+      await vendor.save()
+
+      return token
+}
+
+//login users
+vendorSchema.statics.findByCredentials = async(email, password) => {
+    const vendor = await Vendor.findOne({ email })
+    if(!vendor) {
+        throw new error('Cant Log In')
+    }
+    const isMatch = await bcrypt.compare(password, vendor.password)
+    if(!isMatch) {
+        throw new Error("Cant Log In")
+    }
+    return vendor
+}
+
+//hash plain password
+vendorSchema.pre('save', async function(next){
+    const vendor= this
+    if(vendor.isModified('password')){
+        vendor.password = await bcrypt.hash(vendor.password, 8)
+    }
+    next()
+})
+
 
 const Vendor = mongoose.model('Vendor', vendorSchema);
 
