@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const customerSchema = new mongoose.Schema({
     username: {
@@ -72,6 +72,41 @@ const customerSchema = new mongoose.Schema({
 {
     timestamps: true
 });
+
+//Generate authentication tokem
+customerSchema.methods.generateAuthToken = async function(){
+    const customer = this
+      const token = jwt.sign({
+        _id: customer._id.toString()
+      }, process.env.JWT_SECRET)
+      user.tokens = user.tokens.concat({token})
+      await user.save()
+
+      return token
+}
+
+//login users
+customerSchema.statics.findByCredentials = async(email, password) => {
+    const customer = await Customer.findOne({ email })
+    if(!customer) {
+        throw new error('Cant Log In')
+    }
+    const isMatch = await bcrypt.compare(password, customer.password)
+    if(!isMatch) {
+        throw new Error("Cant Log In")
+    }
+    return customer
+}
+
+//hash plain password
+customerSchema.pre('save', async function(next){
+    const customer = this
+    if(customer.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+    next()
+})
+
 
 const Customer = mongoose.model('Customer', customerSchema);
 
