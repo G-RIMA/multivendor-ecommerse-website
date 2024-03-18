@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import LoginForm from '../components/LoginForm';
+import styles from '../styles/Login.module.css';
+import Image from 'next/image';
 
 const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -31,10 +33,19 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className={styles.body}>
+      <h1 className={styles.h1}>Login</h1>
+      <div className={styles.container}>
+      <Image 
+      src='/logo1.png'
+      alt='logo'
+      height={500}
+      width={150}
+      className={styles.logo}
+      />
       <LoginForm onSubmit={handleLoginSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
+      </div>
     </div>
   );
 };

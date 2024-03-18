@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import SignupForm from '../components/SignupForm';
+import styles from '../styles/SignupForm.module.css';
+import Image from 'next/image';
+
 
 const Signup: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,6 +22,7 @@ const Signup: React.FC = () => {
       if (response.ok) {
         // Signup successful
         // Redirect the user to another page or perform any necessary actions
+        
       } else {
         // Signup failed, display error message
         const data = await response.json();
@@ -31,10 +35,19 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
+    <div className={styles.body}>
+      <h1 className={styles.h1}>Signup</h1>
+      <div className={styles.container}>
+      <Image 
+      src='/logo1.png'
+      alt='logo'
+      height={500}
+      width={150}
+      className={styles.logo}
+      />
       <SignupForm onSubmit={handleSignupSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import styles from "../styles/Login.module.css";
 
 interface LoginFormProps {
   onSubmit: (formData: { email: string; password: string }) => void;
@@ -17,12 +18,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   };
 
   return (
+    <div className={styles.form_container}>
     <form onSubmit={handleSubmit}>
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
+        className={styles.input_field}
         required
       />
       <input
@@ -30,10 +33,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+        className={styles.input_field}
         required
       />
-      <button type="submit">Login</button>
+      <button 
+      type="submit"
+      className={styles.button}>Login</button>
     </form>
+    </div>
   );
 };
 
