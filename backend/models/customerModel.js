@@ -40,14 +40,10 @@ const customerSchema = new mongoose.Schema({
         required: true,
         minlength: 8,
         validate( value ){
-            if(
-                value.toLowerCase().includes('password')){
-                    throw new Error('password cant contain the word password')
-                }
-            else if(
-                !validator.isAlphanumeric( value ))
-                {
-                throw new Error('Password must contain numbers and letters')
+            if (value.toLowerCase().includes('password')) {
+                throw new Error("Password can't contain the word 'password'");
+            } else if (!/\d/.test(value) || !/[a-zA-Z]/.test(value)) {
+                throw new Error('Password must contain both numbers and letters');
             }
         },
         unique: true
@@ -57,10 +53,10 @@ const customerSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    phonenumber: {
+    phoneNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
     },
     tokens: [{
         token: {

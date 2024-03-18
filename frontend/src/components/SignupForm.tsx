@@ -1,25 +1,32 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 interface SignupFormProps {
   onSubmit: (formData: {
     username: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
+    address: string;
+    phoneNumber: number; 
   }) => void;
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [firstName, setFirstname] = useState('');
   const [lastName, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
-  const [phoneNumber, setPhonenumber] = useState('');
+  const [phoneNumber, setPhonenumber] = useState<number>(0); // Initialize phoneNumber as a number
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ username, email, password });
+    onSubmit({ username,firstName, lastName, email, password, address, phoneNumber });
+    router.push('/login');
   };
 
   return (
@@ -35,14 +42,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         type="text"
         value={firstName}
         onChange={(e) => setFirstname(e.target.value)}
-        placeholder="Username"
+        placeholder="First Name"
         required
       />
       <input
         type="text"
         value={lastName}
         onChange={(e) => setLastname(e.target.value)}
-        placeholder="Username"
+        placeholder="Second Name"
         required
       />
       <input
@@ -69,7 +76,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <input
         type="text"
         value={phoneNumber}
-        onChange={(e) => setPhonenumber(e.target.value)}
+        onChange={(e) => setPhonenumber(Number(e.target.value))} // Convert input value to number
         placeholder="phone number"
         required
       />
