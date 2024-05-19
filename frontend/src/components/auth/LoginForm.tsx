@@ -14,12 +14,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6 ">
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-mint bg-transparent"
         required
       />
       <input
@@ -27,9 +28,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-mint bg-transparent"
         required
       />
-      <button type="submit">Login</button>
+      <button 
+      type="submit"
+      className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint">
+        Login
+      </button>
     </form>
   );
 };

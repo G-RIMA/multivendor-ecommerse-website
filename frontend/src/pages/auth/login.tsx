@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../../components/auth/LoginForm';
 
 const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -32,7 +32,6 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <h1>Login</h1>
       <LoginForm onSubmit={handleLoginSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
     </div>

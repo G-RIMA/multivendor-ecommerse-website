@@ -23,26 +23,29 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6">
       <input
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Username"
+        className="w-full p-2 text-white placeholder-white border border-black bg-transparent rounded focus:outline-none focus:ring-2 focus:ring-black"
         required
       />
       <input
         type="text"
         value={firstName}
         onChange={(e) => setFirstname(e.target.value)}
-        placeholder="Username"
+        placeholder="First Name"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 bg-transparent rounded focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
       <input
         type="text"
         value={lastName}
         onChange={(e) => setLastname(e.target.value)}
-        placeholder="Username"
+        placeholder="Last Name"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
       <input
@@ -50,6 +53,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
       <input
@@ -57,24 +61,30 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
       <input
         type="text"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
-        placeholder="address"
+        placeholder="Address"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
       <input
         type="text"
         value={phoneNumber}
         onChange={(e) => setPhonenumber(e.target.value)}
-        placeholder="phone number"
+        placeholder="Phone number"
+        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
         required
       />
 
-      <button type="submit">Signup</button>
+      <button 
+      type="submit"
+      className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint"
+      >Signup</button>
     </form>
   );
 };
