@@ -1,33 +1,50 @@
 import Head from 'next/head';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 const HomePage = () => {
   return (
     <div>
       <Head>
-        <title>E-commerce Website</title>
+        <title>Aphrikea</title>
         <meta name="description" content="Welcome to our e-commerce website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header className="bg-white shadow">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl font-bold text-gray-800">MyShop</div>
-          <nav className="space-x-4">
-            <a href="#" className="text-gray-800 hover:text-gray-600">Home</a>
-            <a href="#" className="text-gray-800 hover:text-gray-600">Shop</a>
-            <a href="#" className="text-gray-800 hover:text-gray-600">About</a>
-            <a href="#" className="text-gray-800 hover:text-gray-600">Contact</a>
+          <div className="flex items-center space-x-4 text-xl font-bold text-gray-800">
+            <button className="p-2">Mega Menu</button>
+            <img src="/logo.png" alt="logo" className='w-40' />
+          </div>
+          <div className="flex-1">
+            <input type="text" placeholder="Search" className="ml-10 w-1/2 p-2 border border-gray-300 rounded"/>
+          </div>
+          <nav className="flex space-x-4">
+            <button className="p-4 text-gray-800 hover:text-gray-600 border rounded-md bg-raspberry">WishList</button>
+            <button className="p-4 text-gray-800 hover:text-gray-600 border rounded-md bg-raspberry">Cart</button>
+            <button className="p-4 text-gray-800 hover:text-gray-600 border rounded-md bg-raspberry">Login</button>
+            <button className="p-4 text-gray-800 hover:text-gray-600 border rounded-md bg-raspberry">Sign Up</button>
+            <button className="p-4 text-gray-800 hover:text-gray-600 border rounded-md bg-raspberry">Vendor</button>
           </nav>
         </div>
       </header>
 
       <main>
-        <section className="bg-gradient-to-r from-mint to-raspberry text-white py-20">
-          <div className="container mx-auto px-6 text-center">
-            <h1 className="text-4xl font-bold mb-2">Welcome to MyShop</h1>
-            <p className="text-lg mb-6">Find the best products here</p>
-            <a href="#" className="bg-white text-gray-800 py-2 px-4 rounded-full hover:bg-gray-200">Shop Now</a>
+        <section className="flex space-x-8 container mx-auto px-5 py-5">
+          <div>
+            <h3>Popular Categories: </h3>
           </div>
+          <div className='flex space-x-4'>
+            <a href="#" className="hover:text-gray-400">Clothes</a>
+            <a href="#" className="hover:text-gray-400">Beauty And Hair</a>
+            <a href="#" className="hover:text-gray-400">Fabrics</a>
+            <a href="#" className="hover:text-gray-400">Accessories</a>
+          </div>
+        </section>
+        <section className="bg-gradient-to-r from-mint to-raspberry text-white py-20">
+           
+
         </section>
 
         <section className="container mx-auto px-6 py-20">
