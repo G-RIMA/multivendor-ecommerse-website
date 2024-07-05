@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoginForm from './auth/LoginForm';
-import SignupForm from './auth/SignupForm';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 
 const AuthPage: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);

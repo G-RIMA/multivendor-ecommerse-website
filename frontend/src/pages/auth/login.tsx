@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LoginForm from '../../components/auth/LoginForm';
+import LoginForm from '../../app/components/auth/LoginForm';
 
 const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');

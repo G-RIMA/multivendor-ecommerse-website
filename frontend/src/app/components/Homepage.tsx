@@ -1,8 +1,10 @@
 import Head from 'next/head';
+import React from 'react';
+import MegaMenu from './mega-menu';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const HomePage = () => {
+const HomePage:React.FC = () => {
   return (
     <div>
       <Head>
@@ -14,7 +16,7 @@ const HomePage = () => {
       <header className="bg-white shadow">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-4 text-xl font-bold text-gray-800">
-            <button className="p-2">Mega Menu</button>
+            <MegaMenu />
             <img src="/logo.png" alt="logo" className='w-40' />
           </div>
           <div className="flex-1">
