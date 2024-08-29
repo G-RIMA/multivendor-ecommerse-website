@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const Customer = require('../models/Customer');
+const Customer = require('../models/customerModel');
 
 // Controller methods for user management
 exports.signUp = async(req, res) => {
