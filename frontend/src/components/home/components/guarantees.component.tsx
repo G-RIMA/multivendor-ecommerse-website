@@ -34,9 +34,9 @@ const GuaranteesAndPromo = () => {
         </div>
       </div>
       
-      <div className="bg-purple-800 p-4 rounded-lg shadow text-white">
-        <div className="text-2xl font-bold mb-2">just<span className="text-orange-500">GOT</span>paid</div>
-        <div className="text-xl font-semibold">EXTRA <span className="text-orange-500">20% OFF</span></div>
+      <div className="bg-mint p-4 rounded-lg shadow text-white">
+        <div className="text-2xl font-bold mb-2">just<span className="text-raspberry">GOT</span>paid</div>
+        <div className="text-xl font-semibold">EXTRA <span className="text-raspberry">20% OFF</span></div>
       </div>
     </div>
   );

@@ -20,6 +20,9 @@ module.exports = {
       backgroundImage: {
         'gradient-mint-raspberry': 'linear-gradient(200deg, #3EB489, #E30B5D)',
       },
+      fontFamily: { 
+        "ubuntu": ['Ubuntu', 'sans-serif'] 
+      } 
     },
   },
   plugins: [],
