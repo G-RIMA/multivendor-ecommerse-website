@@ -22,11 +22,6 @@ import HeadComponent from '../Header';
 const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-mint-raspberry">
-      <>
-       <HeadComponent/>
-       <Header/>
-      </>
-
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-3">
