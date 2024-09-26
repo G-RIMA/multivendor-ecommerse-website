@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 
 import PromotionalSlider from './items/promotional-slider.component';
 import GuaranteesAndPromo from './components/guarantees.component';
@@ -13,15 +12,17 @@ import DealProductSection from './items/topdeals.banner.component';
 import Categories from './items/category-items.component';
 import TopDealSection from './items/topdeals.banner.component';
 import TopCategories from './items/product.categories.component';
-import Image from 'next/image';
-import Link from 'next/link';
-import MegaMenu from './components/megamenu.component';
 import Header from './header.component';
 import HeadComponent from '../Header';
 
 const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-mint-raspberry">
+      <>
+       <HeadComponent/>
+       <Header/>
+      </>
+
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-3">
