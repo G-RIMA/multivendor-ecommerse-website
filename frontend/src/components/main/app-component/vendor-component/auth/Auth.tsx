@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoginForm from './auth/LoginForm';
-import SignupForm from './auth/SignupForm';
+import VendorLoginForm from './LoginForm';
+import VendorSignupForm from './SignupForm';
 
-const AuthPage: React.FC = () => {
+const VendorAuthPage: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => {
@@ -40,7 +40,7 @@ const AuthPage: React.FC = () => {
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.5 }}
             >
-              <LoginForm onSubmit={handleLoginSubmit} />
+              <VendorLoginForm onSubmit={handleLoginSubmit} />
             </motion.div>
           ) : (
             <motion.div
@@ -50,7 +50,7 @@ const AuthPage: React.FC = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
             >
-              <SignupForm onSubmit={handleSignupSubmit} />
+              <VendorSignupForm onSubmit={handleSignupSubmit} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -82,4 +82,4 @@ const AuthPage: React.FC = () => {
   );
 };
 
-export default AuthPage;
+export default VendorAuthPage;
