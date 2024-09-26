@@ -6,22 +6,12 @@ const FeedBackTableComponent = () => {
   const mockData = [
     {
       key: 1,
-      name: 'John Doe',
-      age: 28,
-      address: '1234 Elm St, Springfield',
-    },
-    {
-      key: 2,
-      name: 'Jane Smith',
-      age: 34,
-      address: '5678 Oak St, Springfield',
-    },
-    {
-      key: 3,
-      name: 'Bob Johnson',
-      age: 45,
-      address: '910 Maple St, Springfield',
-    },
+      user: 'John Doe',
+      description: 28,
+      file: '',
+      rating: '1234 Elm St, Springfield',
+      date: ''
+    }
   ];
 
   const handlePageChange = (page: number) => {
@@ -54,7 +44,7 @@ const FeedBackTableComponent = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {['ID', 'PRODUCT', 'CATEGORY', 'BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
+                  {['ID', 'USERS', 'DESCRIPTION', 'FILE', 'RATING', 'DATE'].map((header) => (
                     <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {header}
                     </th>
@@ -62,15 +52,14 @@ const FeedBackTableComponent = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockData.map((product) => (
-                  <tr key={product.key}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.age}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.address}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
+                {mockData.map((review) => (
+                  <tr key={review.key}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{review.key}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{review.user}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{review.description}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{review.file}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{review.rating}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{review.date}</td>
                   </tr>
                 ))}
               </tbody>

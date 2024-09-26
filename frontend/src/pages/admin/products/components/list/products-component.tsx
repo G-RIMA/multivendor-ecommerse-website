@@ -4,24 +4,10 @@ import SidebarLayout from '@/components/main/app-component/admin-component/sideb
 const ProductsTableComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const mockData = [
-    {
-      key: 1,
-      name: 'John Doe',
-      age: 28,
-      address: '1234 Elm St, Springfield',
-    },
-    {
-      key: 2,
-      name: 'Jane Smith',
-      age: 34,
-      address: '5678 Oak St, Springfield',
-    },
-    {
-      key: 3,
-      name: 'Bob Johnson',
-      age: 45,
-      address: '910 Maple St, Springfield',
-    },
+    { id: 1, product: 'DJI Mavic Pro 2', category: 'Tech gadget', vendor: 'Apple',brand: 'Apple', price: '$990.00', stock: 20, rating: 4.8, order: 540, sales: '$34k' },
+    { id: 2, product: 'iPad Pro 2017 Model', category: 'Tech gadget', vendor: 'LG',brand: 'LG', price: '$220.00', stock: 20, rating: 4.8, order: 540, sales: '$34k' },
+    { id: 3, product: 'Lego Star War edition', category: 'Tech gadget',vendor: 'Karborn', brand: 'Karbon', price: '$140.00', stock: 20, rating: 4.8, order: 540, sales: '$34k' },
+    { id: 4, product: 'Dell Curved Monitor', category: 'Tech gadget',vendor: 'Lenovo', brand: 'Lenovo', price: '$220.00', stock: 20, rating: 4.8, order: 540, sales: '$34k' },
   ];
 
   const handlePageChange = (page: number) => {
@@ -50,11 +36,11 @@ const ProductsTableComponent = () => {
           </div>
         </div>
         <div className="mx-auto bg-white p-6 m-10 mx-10 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-4">Best Selling Product</h3>
+            <h3 className="text-lg font-semibold mb-4">Product</h3>
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {['ID', 'PRODUCT', 'CATEGORY', 'BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
+                  {['ID', 'PRODUCT', 'CATEGORY','VENDOR','BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
                     <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {header}
                     </th>
@@ -63,14 +49,17 @@ const ProductsTableComponent = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {mockData.map((product) => (
-                  <tr key={product.key}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.age}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.address}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
+                  <tr key={product.id}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.product}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.category}</td> 
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.vendor}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.brand}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.price}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.stock}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.rating}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.order}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.sales}</td>
                   </tr>
                 ))}
               </tbody>

@@ -7,20 +7,23 @@ const BlockedUsersComponent = () => {
     {
       key: 1,
       name: 'John Doe',
-      age: 28,
-      address: '1234 Elm St, Springfield',
+      vendor: 'Africaans',
+      product: 'Shoes',
+      reason: 'Lied to customers'
     },
     {
       key: 2,
       name: 'Jane Smith',
-      age: 34,
-      address: '5678 Oak St, Springfield',
+      vendor: 'Pink Shop',
+      product: 'Hats',
+      reason: 'Couldnt provide product image'
     },
     {
       key: 3,
       name: 'Bob Johnson',
-      age: 45,
-      address: '910 Maple St, Springfield',
+      vendor: 'Baby',
+      product: 'Bags',
+      reason: 'Couldnt provide the right materials'
     },
   ];
 
@@ -49,27 +52,29 @@ const BlockedUsersComponent = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto bg-white p-6 m-10 mx-10 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-4">Best Selling Product</h3>
+        <div className="mx-auto bg-white p-6 my-20 mx-20 rounded-lg shadow">
+            <h3 className="text-lg font-semibold mb-4">Blocked Vendors</h3>
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {['ID', 'PRODUCT', 'CATEGORY', 'BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
-                    <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {['ID', 'NAME', 'VENDOR', 'PRODUCT', 'REASON', 'ACTION'].map((header) => (
+                    <th key={header} className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockData.map((product) => (
-                  <tr key={product.key}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.age}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.address}</td>
+                {mockData.map((blocked) => (
+                  <tr key={blocked.key}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blocked.key}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{blocked.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blocked.vendor}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blocked.product}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blocked.reason}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
+                      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button">Unblock</button>
                     </td>
                   </tr>
                 ))}

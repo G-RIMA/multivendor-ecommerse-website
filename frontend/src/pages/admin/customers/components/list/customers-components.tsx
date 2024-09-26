@@ -7,20 +7,27 @@ const CustomersComponent = () => {
     {
       key: 1,
       name: 'John Doe',
-      age: 28,
-      address: '1234 Elm St, Springfield',
+      email: 'nfff@hh.com',
+      emailVerified: true,
+      address: '',
+      paymentVerified: true
+
     },
     {
       key: 2,
       name: 'Jane Smith',
-      age: 34,
-      address: '5678 Oak St, Springfield',
+      email: 'ggg@mm.com',
+      emailVerified: true,
+      address: '',
+      paymentVerified: true
     },
     {
       key: 3,
       name: 'Bob Johnson',
-      age: 45,
-      address: '910 Maple St, Springfield',
+      email: 'ggg@nmm.com',
+      emailVerified: true,
+      address: '',
+      paymentVerified: true
     },
   ];
 
@@ -50,11 +57,11 @@ const CustomersComponent = () => {
           </div>
         </div>
         <div className="mx-auto bg-white p-6 m-10 mx-10 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-4">Best Selling Product</h3>
+            <h3 className="text-lg font-semibold mb-4">Sellers</h3>
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {['ID', 'PRODUCT', 'CATEGORY', 'BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
+                  {['ID', 'NAME','EMAIL','EMAIL VERIFIED', 'ADDRESS','PAYMENT METHOD VERIFIED'].map((header) => (
                     <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {header}
                     </th>
@@ -62,12 +69,18 @@ const CustomersComponent = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockData.map((product) => (
-                  <tr key={product.key}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.age}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.address}</td>
+                {mockData.map((customer) => (
+                  <tr key={customer.key}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{customer.key}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{customer.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {customer.emailVerified ? 'Yes' : 'No'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{customer.address}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {customer.paymentVerified ? 'Yes' : 'No'}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
                     </td>

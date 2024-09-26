@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import SidebarLayout from '@/components/main/app-component/admin-component/sidebar/sidebar-component';
+import Categories from '@/components/home/items/category-items.component';
 
-const BannedTableComponent = () => {
+const ReviewTableComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,27 +11,8 @@ const BannedTableComponent = () => {
   };
 
   const mockData = [
-    {
-      key: 1,
-      name: 'John Doe',
-      reason: 'Used fake images',
-      duration: '60 days',
-      address: '1234 Elm St, Springfield',
-    },
-    {
-      key: 2,
-      name: 'Jane Smith',
-      reason: 'Does not deliver products',
-      duration: '30 days',
-      address: '5678 Oak St, Springfield',
-    },
-    {
-      key: 3,
-      name: 'Bob Johnson',
-      reason: 'Lied about location',
-      duration: '30 days',
-      address: '910 Maple St, Springfield',
-    },
+    { id: 1, product: 'DJI Mavic Pro 2', category: 'Tech gadget', vendor: 'Apple',brand: 'Apple', price: '$990.00', stock: 20, rating: 4.8, order: 540, sales: '$34k' }
+    
   ];
 
   const handlePageChange = (page: number) => {
@@ -58,12 +40,12 @@ const BannedTableComponent = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto bg-white p-6 my-20 mx-20 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-4">Banned Vendors</h3>
+        <div className="mx-auto bg-white p-6 m-10 mx-10 rounded-lg shadow">
+            <h3 className="text-lg font-semibold mb-4">Approve Vendors</h3>
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  {['ID', 'NAME', 'REASON FOR BEING BANNED', 'DURATION(BANNED FOR HOW LONG)', 'ACTION'].map((header) => (
+                  {['ID', 'VENDOR','PRODUCT', 'CATEGORY', 'BRAND', 'PRICE', 'STOCK', 'RATING', 'ORDER', 'SALES', 'ACTION'].map((header) => (
                     <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {header}
                     </th>
@@ -71,12 +53,18 @@ const BannedTableComponent = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockData.map((banned) => (
-                  <tr key={banned.key}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{banned.key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{banned.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{banned.reason}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{banned.duration}</td>
+                {mockData.map((product) => (
+                  <tr key={product.id}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.vendor}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.product}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.category}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.brand}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.price}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.stock}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.rating}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.order}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.sales}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button
                         id="dropdownDefaultButton"
@@ -84,7 +72,7 @@ const BannedTableComponent = () => {
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button"
                       >
-                        Dropdown button{" "}
+                        STATUS{" "}
                         <svg
                           className="w-2.5 h-2.5 ms-3"
                           aria-hidden="true"
@@ -115,7 +103,7 @@ const BannedTableComponent = () => {
                                 href="#"
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                               >
-                                Edit
+                                APPROVE
                               </a>
                             </li>
                             <li>
@@ -123,7 +111,7 @@ const BannedTableComponent = () => {
                                 href="#"
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                               >
-                                Increase Duration
+                                DENY
                               </a>
                             </li>
                           </ul>
@@ -141,4 +129,4 @@ const BannedTableComponent = () => {
   );
 };
 
-export default BannedTableComponent;
+export default ReviewTableComponent;
