@@ -2,7 +2,7 @@ import AdminLayout from '@/components/main/app-component/admin-component/adminLa
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Admin',
+	title: 'Vendor',
 	description: 'Welcome to Next.js'
 };
 export default function RootLayout({

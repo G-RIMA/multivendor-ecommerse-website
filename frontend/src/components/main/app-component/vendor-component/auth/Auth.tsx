@@ -25,9 +25,9 @@ const VendorAuthPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-mint-raspberry">
+    <div className="flex flex-col items-center justify-center bg-gradient-mint-raspberry">
       
-      <div className="relative w-full max-w-md p-8 space-y-8 bg-mint shadow-xl rounded-lg overflow-hidden">
+      <div className="relative w-full max-w-4xl p-8 space-y-8 bg-mint shadow-xl rounded-lg overflow-hidden">
         <div className="flex w-full items-center justify-right">
           <img src="/logo.png" alt="Logo" className="max-w-full h-auto" />
         </div>
