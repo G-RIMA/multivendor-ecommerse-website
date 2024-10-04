@@ -25,11 +25,11 @@ const VendorAuthPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-mint-raspberry">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-mint-raspberry">
       
       <div className="relative w-full max-w-4xl p-8 space-y-8 bg-mint shadow-xl rounded-lg overflow-hidden">
-        <div className="flex w-full items-center justify-right">
-          <img src="/logo.png" alt="Logo" className="max-w-full h-auto" />
+        <div className="flex w-full items-center justify-center">
+          <img src="/logo.png" alt="Logo" className="max-w-full" />
         </div>
         <AnimatePresence mode='wait'>
           {isLogin ? (

@@ -1,3 +1,4 @@
+import { Form } from 'antd';
 import { useState } from 'react';
 
 interface LoginFormProps {
@@ -14,7 +15,7 @@ const VendorLoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 ">
+    <Form onFinish={handleSubmit} className="space-y-6 " layout="vertical">
       <input
         type="email"
         value={email}
@@ -36,7 +37,7 @@ const VendorLoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint">
         Login
       </button>
-    </form>
+    </Form>
   );
 };
 
