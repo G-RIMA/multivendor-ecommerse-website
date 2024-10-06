@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import LoginForm from '../../components/auth/LoginForm';
+import { useRouter } from 'next/router';
 
 const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const handleLoginSubmit = async (formData: { email: string; password: string }) => {
     // You can handle form submission logic here, e.g., making an API request to authenticate the user
@@ -18,6 +20,7 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         // Login successful
+        router.push('/home')
         // Redirect the user to another page or perform any necessary actions
       } else {
         // Login failed, display error message

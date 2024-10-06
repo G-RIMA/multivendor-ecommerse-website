@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   try {
     const response = await axios.post(
-      "http://localhost:3001/api/login",
+      "http://localhost:3000/api/login",
       req.body,
     );
 

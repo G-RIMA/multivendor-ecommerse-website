@@ -8,7 +8,7 @@ const VendorLogin: React.FC = () => {
     // You can handle form submission logic here, e.g., making an API request to authenticate the user
     try {
       // Example of API request
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/vendor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

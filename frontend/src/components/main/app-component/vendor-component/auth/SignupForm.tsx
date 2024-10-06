@@ -62,7 +62,7 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       <Form form={form} onFinish={handleSubmit} layout="vertical">
         <FormSection title="Company Details">
           <Form.Item name="companyName" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Company Name/ Business Name" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
+            <Input placeholder="Company/ Business Name" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
           <Form.Item name="registrationNumber" rules={[{ required: true, message: 'Required' }]}>
             <Input placeholder="Registration Number" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
@@ -72,6 +72,9 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           </Form.Item>
           <Form.Item name="businessAddress" rules={[{ required: true, message: 'Required' }]}>
             <Input placeholder="Business Address" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
+          </Form.Item>
+          <Form.Item name="businessAddress2">
+            <Input placeholder="Second Business Address" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
           <Form.Item name="businessEmail" rules={[{ required: true, type: 'email', message: 'Please enter a valid email' }]}>
             <Input placeholder="Business Email" className="bg-transparent placeholder-white border-b border-gray-300 focus:border-blue-500" />
@@ -109,16 +112,16 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           <Form.Item name="lastName" rules={[{ required: true, message: 'Required' }]}>
             <Input placeholder="Last Name" className="placeholder-white bg-transparent border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
-          <Form.Item name="id" rules={[{ required: true, message: 'Required' }]}>
+          <Form.Item name="idNumber" rules={[{ required: true, message: 'Required' }]}>
             <Input placeholder="ID" className="placeholder-white bg-transparent border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
-          <Form.Item name="email" rules={[{ type: 'email', message: 'Invalid email' }]}>
+          <Form.Item name="personalEmail" rules={[{ type: 'email', message: 'Invalid email' }]}>
             <Input placeholder="E-mail (Optional)" className="placeholder-white bg-transparent border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
           <Form.Item name="dateOfBirth" rules={[{ required: true, message: 'Required' }]}>
             <DatePicker placeholder="Date of Birth" className="placeholder-white w-full bg-transparent border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
-          <Form.Item name="phone" rules={[{ required: true, message: 'Required' }]}>
+          <Form.Item name="personalPhone" rules={[{ required: true, message: 'Required' }]}>
             <Input addonBefore={prefixSelector} placeholder="Phone Number" className="placeholder-white bg-transparent border-b border-gray-300 focus:border-blue-500" />
           </Form.Item>
         </FormSection>

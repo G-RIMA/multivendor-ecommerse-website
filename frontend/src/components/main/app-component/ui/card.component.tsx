@@ -26,6 +26,6 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function CardContent({ className, ...props }: CardContentProps) {
   return (
-    <div className="p-2 pt-0 text-white" {...props} />
+    <div className="p-2 pt-0 text-white" {...props}/>
   )
 }

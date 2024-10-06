@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import AdminSignupForm from '@/components/main/app-component/admin-component/auth/SignupForm';
+import { useRouter } from 'next/router';
+import VendorSignupForm from '@/components/main/app-component/vendor-component/auth/SignupForm';
 
 const VendorSignup: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const handleSignupSubmit = async (formData: { username: string; email: string; password: string }) => {
-    // You can handle form submission logic here, e.g., making an API request to register the user
     try {
-      // Example of API request
-      const response = await fetch('/api/signup', {
+      const response = await fetch('/api/vendors/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,10 +17,8 @@ const VendorSignup: React.FC = () => {
       });
 
       if (response.ok) {
-        // Signup successful
-        // Redirect the user to another page or perform any necessary actions
+        router.push('/vendor/dashboard')
       } else {
-        // Signup failed, display error message
         const data = await response.json();
         setErrorMessage(data.message || 'Signup failed');
       }
@@ -32,7 +30,7 @@ const VendorSignup: React.FC = () => {
 
   return (
     <div>
-      <AdminSignupForm onSubmit={handleSignupSubmit} />
+      <VendorSignupForm onSubmit={handleSignupSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
