@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import LoginForm from '../../components/auth/LoginForm';
-import { useRouter } from 'next/router';
+import AdminLoginForm from '@/components/main/app-component/admin-component/auth/LoginForm';
 
-const Login: React.FC = () => {
+const VendorLogin: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
 
   const handleLoginSubmit = async (formData: { email: string; password: string }) => {
     // You can handle form submission logic here, e.g., making an API request to authenticate the user
     try {
       // Example of API request
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/vendor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,7 +18,6 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         // Login successful
-        router.push('/home')
         // Redirect the user to another page or perform any necessary actions
       } else {
         // Login failed, display error message
@@ -35,10 +32,10 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <LoginForm onSubmit={handleLoginSubmit} />
+      <AdminLoginForm onSubmit={handleLoginSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 };
 
-export default Login;
+export default VendorLogin;

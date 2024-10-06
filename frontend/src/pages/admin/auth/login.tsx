@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import LoginForm from '../../components/auth/LoginForm';
+import AdminLoginForm from '@/components/main/app-component/admin-component/auth/LoginForm';
 import { useRouter } from 'next/router';
 
-const Login: React.FC = () => {
+const AdminLogin: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         // Login successful
-        router.push('/home')
+        router.push('/admin/dashboard')
         // Redirect the user to another page or perform any necessary actions
       } else {
         // Login failed, display error message
@@ -35,10 +35,10 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <LoginForm onSubmit={handleLoginSubmit} />
+      <AdminLoginForm onSubmit={handleLoginSubmit} />
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

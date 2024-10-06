@@ -1,45 +1,107 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const vendorSchema = new mongoose.Schema({
-    username: {
+    // Company Details
+    companyName: {
         type: String,
         required: true,
-        trim: true,
-        lowercase: true
+        trim: true
     },
-    firstName: {
+    registrationNumber: {
         type: String,
         required: true,
-        trim: true,
-        lowercase: true
+        unique: true,
+        trim: true
     },
-    lastName: {
+    kraPin: {
         type: String,
         required: true,
-        trim: true,
-        lowercase: true
+        unique: true,
+        trim: true
     },
-    email: {
+    businessAddress: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    businessAddress2: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    businessEmail: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
-          validate( value ){
-            if(
-                !validator.isEmail( value ))
-                {
-                    throw new Error('Email is invalid')
-                }
-          }
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Business email is invalid');
+            }
+        }
     },
+    businessPhone: {
+        type: String,
+        required: true,
+        unique: true,
+        validate(value) {
+            if (!validator.isMobilePhone(value)) {
+                throw new Error('Business phone number is invalid');
+            }
+        }
+    },
+    
+    // Business Owner Details
+    firstName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    personalEmail: {
+        type: String,
+        lowercase: true,
+        validate(value) {
+            if (value && !validator.isEmail(value)) {
+                throw new Error('Personal email is invalid');
+            }
+        }
+    },
+    idNumber: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    dateOfBirth: {
+        type: Date,
+        required: true
+    },
+    personalPhone: {
+        type: String,
+        required: true,
+        unique: true,
+        validate(value) {
+            if (!validator.isMobilePhone(value)) {
+                throw new Error('Personal phone number is invalid');
+            }
+        }
+    },
+
+    // Authentication
     password: {
         type: String,
         required: true,
         minlength: 8,
-        validate( value ){
+        unique: true,
+        validate(value) {
             if(
                 value.toLowerCase().includes('password')){
                     throw new Error('password cant contain the word password')
@@ -49,27 +111,19 @@ const vendorSchema = new mongoose.Schema({
                 {
                 throw new Error('Password must contain numbers and letters')
             }
-        },
-        unique: true
-    },
-    address: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    phonenumber: {
-        type: Number,
-        required: true,
-        unique: true
+        }
     },
     tokens: [{
         token: {
             type: String,
             required: true
         }
-    }]
-},
-{
+    }],
+    isVerified: {
+        type: Boolean,
+        default: false
+    }
+}, {
     timestamps: true
 });
 
