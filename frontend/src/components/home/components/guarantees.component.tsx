@@ -1,5 +1,6 @@
 import React from 'react';
 import { HelpCircle, RefreshCw, Users } from 'lucide-react';
+import Link from 'next/link';
 
 const GuaranteesAndPromo = () => {
   return (
@@ -28,7 +29,12 @@ const GuaranteesAndPromo = () => {
         <div className="flex items-center space-x-3 text-gray-700">
           <Users className="w-6 h-6 text-orange-500" />
           <div>
-            <div className="font-semibold">SELL ON JUMIA</div>
+            <div className="font-semibold">
+              <Link href='/vendor/auth'>
+              SELL ON APHRIKEA
+              </Link>
+              
+              </div>
             <div className="text-sm">Millions Of Visitors</div>
           </div>
         </div>
