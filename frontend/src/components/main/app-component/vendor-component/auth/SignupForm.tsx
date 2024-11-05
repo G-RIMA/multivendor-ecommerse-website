@@ -130,10 +130,10 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit,isLoading }) => 
           <button 
             type="submit"
             disabled={isLoading}
-            className={`${isLoading ? 'opacity-50 cursor-not-allowed w-full p-3 m-3 text-white bg-raspberry rounded-lg hover:bg-lightMint transition-colors' : ''}`}
+            className={`${isLoading ? 'opacity-50 cursor-not-allowed w-full p-3 m-3 text-white bg-raspberry rounded-lg hover:bg-lightMint transition-colors' : 'className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint">'}`}
            
           >
-            Signup
+            Submit
           </button>
         </Form.Item>
       </Form>
