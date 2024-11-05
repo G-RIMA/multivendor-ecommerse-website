@@ -1,8 +1,4 @@
-import type { Metadata } from "next";
-import { Ubuntu } from "next/font/google";
-
-
-const ubuntu = Ubuntu({ weight: ["700"], subsets: ['latin']})
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export default function RootLayout({
   children,
@@ -10,8 +6,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={ubuntu.className}>{children}</body>
-    </html>
+    <div>
+        <AntdRegistry>{children}</AntdRegistry>
+    </div>
   );
 }

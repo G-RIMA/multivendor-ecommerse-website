@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
+    <div className='font-ubuntu' >
       {/* Header */}
       <HeadComponent/>
       <Header/>

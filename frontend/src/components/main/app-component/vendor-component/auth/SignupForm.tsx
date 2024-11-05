@@ -1,15 +1,15 @@
 import React from 'react';
 import { DatePicker, Form, Input, Select, ConfigProvider, Divider } from 'antd';
 import { Card, CardContent, CardHeader } from '../../ui/card.component';
-import { genPlaceholderStyle } from 'antd/es/input/style';
 
 const { Option } = Select;
 
 interface SignupFormProps {
   onSubmit: (formData: any) => void;
+  isLoading?: boolean;
 }
 
-const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
+const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit,isLoading }) => {
   const [form] = Form.useForm();
 
   const handleSubmit = (values: any) => {
@@ -129,7 +129,9 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         <Form.Item>
           <button 
             type="submit"
-            className="w-full p-3 m-3 text-white bg-raspberry rounded-lg hover:bg-lightMint transition-colors"
+            disabled={isLoading}
+            className={`${isLoading ? 'opacity-50 cursor-not-allowed w-full p-3 m-3 text-white bg-raspberry rounded-lg hover:bg-lightMint transition-colors' : ''}`}
+           
           >
             Signup
           </button>

@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
+    <div className='font-ubuntu'>
       {/* Header */}
       <Sidebar/>
       <NavigationLayout/>

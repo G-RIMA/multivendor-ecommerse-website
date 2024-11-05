@@ -39,17 +39,20 @@ app.get('/', function (req, res) {
 });
 
 // Define routes
-const customerRoutes = require('./routes/customerRoutes');
+//const customerRoutes = require('./routes/customerRoutes');
 //const productRoutes = require('./routes/productRoutes');
 //const orderRoutes = require('./routes/orderRoutes');
-const vendorRoutes = require('./routes/vendorRoute');
+//const vendorRoutes = require('./routes/vendorRoute');
+const authRoutes = require('./routes/authRoute');
 //const reviewRoutes = require('./routes/reviewRoutes');
 
 
-app.use('/api', customerRoutes);
+//app.use('/api', customerRoutes);
 //app.use('/products', productRoutes);
 //app.use('/orders', orderRoutes);
-app.use('/api/vendors', vendorRoutes);
+//app.use('/api/vendors', vendorRoutes);
+
+app.use('/', authRoutes);
 //app.use('/reviews', reviewRoutes);
 
 // Start the server
