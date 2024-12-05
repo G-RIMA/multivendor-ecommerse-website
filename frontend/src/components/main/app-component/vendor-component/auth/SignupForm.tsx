@@ -1,19 +1,58 @@
-import React from 'react';
-import { DatePicker, Form, Input, Select, ConfigProvider, Divider } from 'antd';
-import { Card, CardContent, CardHeader } from '../../ui/card.component';
-import { genPlaceholderStyle } from 'antd/es/input/style';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { registerUser } from '@/redux/actions/userActions';
+import { UserRole } from '@/redux/types/user.types';
+import { RootState } from '@/redux/store/store-config';
+import { useAppDispatch, useAppSelector } from '@/redux/redux-hooks/hooks';
+import { Card, ConfigProvider, DatePicker, Form, Input, Select } from 'antd';
+import { CardHeader, CardContent } from '../../ui/card.component';
+import moment from 'moment';
 
 const { Option } = Select;
 
-interface SignupFormProps {
-  onSubmit: (formData: any) => void;
-}
 
-const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
+const VendorSignupForm = () => {
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { loading, error } = useSelector((state: RootState) => state.user);
 
-  const handleSubmit = (values: any) => {
-    onSubmit(values);
+  const handleSubmit = async (values: any) => {
+    // Transform the form data to match our user model
+    console.log('Form values received:', values);
+    
+    const registerData = {
+      email: values.businessEmail,
+      password: values.password,
+      role: UserRole.VENDOR,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: values.personalPhone,
+      companyDetails: {
+        companyName: values.companyName,
+        registrationNumber: values.registrationNumber,
+        kraPin: values.kraPin,
+        businessAddress: values.businessAddress,
+        businessEmail: values.businessEmail,
+        businessPhone: values.businessPhone,
+      },
+      // Additional vendor-specific fields
+      businessOwner: {
+        idNumber: values.idNumber,
+        personalEmail: values.personalEmail,
+        dateOfBirth: values.dateOfBirth instanceof moment ? values.dateOfBirth.format('YYYY-MM-DD') : values.dateOfBirth,
+      }
+    };
+
+    console.log('Sending registration data:', registerData);
+
+    try {
+      await dispatch(registerUser(registerData)).unwrap();
+      router.push('/vendor/dashboard'); // Redirect to dashboard on success
+    } catch (err) {
+      // Error is handled by Redux, but you can add additional error handling here
+      console.error('Registration failed:', err);
+    }
   };
 
   const prefixSelector = (
@@ -30,22 +69,45 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       Input: {
         colorBgContainer: 'transparent',
         colorBorder: 'transparent',
-        colorTextPlaceholder: 'rgba(255, 255, 255, 0.7)',
+        colorBgContainerDisabled: 'transparent',
+        colorTextPlaceholder: 'rgba(0, 0, 0, 0.45)',
+        colorBgElevated: 'transparent', // For dropdowns
+        controlItemBgActive: 'transparent', // For active state
+        controlItemBgHover: 'transparent', // For hover state
       },
       Select: {
         colorBgContainer: 'transparent',
-        colorTextPlaceholder: 'rgba(255, 255, 255, 0.7)',
+        colorBorder: 'transparent',
+        colorTextPlaceholder: 'rgba(0, 0, 0, 0.45)',
+        colorBgElevated: 'white', // Keep dropdown background white for readability
       },
       DatePicker: {
         colorBgContainer: 'transparent',
-        colorTextPlaceholder: 'rgba(255, 255, 255, 0.7)',
+        colorBorder: 'transparent',
+        colorTextPlaceholder: 'rgba(0, 0, 0, 0.45)',
+        colorBgElevated: 'white', // Keep calendar background white
       },
     },
   };
 
+  const inputClassName = `
+    bg-transparent 
+    border-b 
+    border-gray-300 
+    focus:border-blue-500
+    hover:bg-transparent
+    focus:bg-transparent
+    active:bg-transparent
+    [&>input]:bg-transparent
+    [&>.ant-input]:bg-transparent
+    [&>.ant-input:focus]:bg-transparent
+    [&>.ant-input:hover]:bg-transparent
+    [&>.ant-input-password-input]:bg-transparent
+  `;
+
   const FormSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <Card className="mb-12">
-      <CardHeader className='bg-mint'>
+    <Card className="mb-12 bg-mint">
+      <CardHeader>
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="text-sm text-gray-500 mt-1">Please provide the following information</p>
       </CardHeader>
@@ -128,10 +190,9 @@ const VendorSignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
         <Form.Item>
           <button 
-            type="submit"
-            className="w-full p-3 m-3 text-white bg-raspberry rounded-lg hover:bg-lightMint transition-colors"
-          >
-            Signup
+          type="submit"
+          className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint">
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </Form.Item>
       </Form>

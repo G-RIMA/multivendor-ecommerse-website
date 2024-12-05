@@ -1,37 +1,38 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useAppDispatch, useAppSelector } from '@/redux/store/store-config'; // Use custom hooks
 import VendorSignupForm from '@/components/main/app-component/vendor-component/auth/SignupForm';
+import { registerUser } from '@/redux/actions/userActions';
+import { RootState } from '@/redux/store/store-config';
 
 const VendorSignup: React.FC = () => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useAppDispatch(); // Use custom dispatch
   const router = useRouter();
+
+  // Select state from the user reducer
+  const { error, loading, currentUser } = useAppSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/vendor/dashboard');
+    }
+  }, [currentUser, router]);
 
   const handleSignupSubmit = async (formData: { username: string; email: string; password: string }) => {
     try {
-      const response = await fetch('/api/vendors/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        router.push('/vendor/dashboard')
-      } else {
-        const data = await response.json();
-        setErrorMessage(data.message || 'Signup failed');
-      }
+      await dispatch(registerUser({
+        ...formData,
+        userType: 'vendor',
+      })).unwrap(); // `unwrap` to handle success/failure
     } catch (error) {
       console.error('Error signing up:', error);
-      setErrorMessage('An unexpected error occurred');
     }
   };
 
   return (
     <div>
-      <VendorSignupForm onSubmit={handleSignupSubmit} />
-      {errorMessage && <p>{errorMessage}</p>}
+      <VendorSignupForm onSubmit={handleSignupSubmit} isLoading={loading} />
+      {error && <p className="text-red-500">{error.message || 'Signup failed'}</p>}
     </div>
   );
 };
