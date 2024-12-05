@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface MenuItem {
   name: string;
@@ -54,8 +55,30 @@ const menuItems: MenuItem[] = [
 const MegaMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const router = useRouter();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Helper function to create URL-friendly slugs
+  const createSlug = (text: string) => {
+    return text.toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/--+/g, '-'); // Replace multiple hyphens with single hyphen
+  };
+
+  const handleCategoryClick = (categoryName: string) => {
+    const slug = createSlug(categoryName);
+    router.push(`/category/${slug}`);
+    toggleMenu();
+  };
+
+  const handleSubCategoryClick = (category: string, subCategory: string) => {
+    const categorySlug = createSlug(category);
+    const subCategorySlug = createSlug(subCategory);
+    router.push(`/category/${categorySlug}/${subCategorySlug}`);
+    toggleMenu();
+  };
 
   return (
     <div className="relative">
@@ -104,15 +127,16 @@ const MegaMenu: React.FC = () => {
                   onMouseEnter={() => setActiveItem(item.name)}
                   onMouseLeave={() => setActiveItem(null)}
                 >
-                  <Link href="/products/homestuff">
-                    <span className="block px-4 py-2 text-sm hover:bg-raspberry hover:text-white cursor-pointer">
-                      {item.name}
-                    </span>
-                  </Link>
+                  <button
+                    onClick={() => handleCategoryClick(item.name)}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-raspberry hover:text-white cursor-pointer"
+                  >
+                    {item.name}
+                  </button>
 
                   {/* Submenu */}
                   {activeItem === item.name && (
-                    <div className=" fixed absolute left-52 top-0 w-72 bg-white shadow-lg rounded-r-lg z-50">
+                    <div className="fixed absolute left-52 top-0 w-72 bg-white shadow-lg rounded-r-lg z-50">
                       <div className="p-4">
                         {Object.entries(item.categories).map(([category, items]) => (
                           <div key={category} className="mb-4">
@@ -121,13 +145,16 @@ const MegaMenu: React.FC = () => {
                             </h3>
                             <ul className="space-y-1">
                               {items.map((subItem) => (
-                                <li key={subItem}>
-                                  <Link href="/products/homestuff">
-                                    <span className="block text-gray-600 hover:text-raspberry text-xs py-1 cursor-pointer">
+                                subItem && (
+                                  <li key={subItem}>
+                                    <button
+                                      onClick={() => handleSubCategoryClick(category, subItem)}
+                                      className="w-full text-left text-gray-600 hover:text-raspberry text-xs py-1 cursor-pointer"
+                                    >
                                       {subItem}
-                                    </span>
-                                  </Link>
-                                </li>
+                                    </button>
+                                  </li>
+                                )
                               ))}
                             </ul>
                           </div>
