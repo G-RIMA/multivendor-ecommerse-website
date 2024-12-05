@@ -59,7 +59,7 @@ const CustomerSignupForm = () => {
       <Form 
         form={form}
         onFinish={handleSubmit} 
-        className="space-y-6"
+        className="space-y-6 p-3"
         layout='vertical'
       >
       <h2 className="text-xl font-semibold">Create Account</h2>
