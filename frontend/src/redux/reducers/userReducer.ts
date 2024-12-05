@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { User, ErrorResponse } from '../../types/api.types';
-import { registerUser, loginUser, updateUserProfile } from './../actions/userActions';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User, ErrorResponse } from '@/redux/types/user.types';
+import { registerUser, loginUser } from '../actions/userActions';
 
 interface UserState {
   currentUser: User | null;
@@ -22,9 +22,13 @@ const userSlice = createSlice({
       state.currentUser = null;
       localStorage.removeItem('token');
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
+      // Register cases
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -39,6 +43,7 @@ const userSlice = createSlice({
           state.error = action.payload;
         }
       })
+      // Login cases
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -53,22 +58,9 @@ const userSlice = createSlice({
           state.error = action.payload;
         }
       })
-      .addCase(updateUserProfile.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(updateUserProfile.fulfilled, (state, action) => {
-        state.loading = false;
-        state.currentUser = action.payload;
-      })
-      .addCase(updateUserProfile.rejected, (state, action) => {
-        state.loading = false;
-        if (action.payload) {
-          state.error = action.payload;
-        }
-      });
+
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, clearError } = userSlice.actions;
 export default userSlice.reducer;

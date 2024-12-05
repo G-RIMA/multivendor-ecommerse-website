@@ -1,134 +1,159 @@
-// components/auth/SignupForm.tsx
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/redux-hooks/hooks';
+import { Card, ConfigProvider, Form, Input, Select } from 'antd';
+import { CardHeader, CardContent } from '../main/app-component/ui/card.component';
+import { registerUser } from '@/redux/actions/userActions';
+import { UserRole } from '@/redux/types/user.types';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import { RootState } from '@/redux/store/store-config';
 
-interface FormData {
+const { Option } = Select;
+
+interface CustomerFormValues {
   username: string;
+  email: string;
   firstName: string;
   lastName: string;
-  email: string;
   password: string;
-  address: string;
-  phoneNumber: string;
+  phone: string;
 }
 
-const SignupForm: React.FC = () => {
+const CustomerSignupForm = () => {
+  const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
   const router = useRouter();
-  const [formData, setFormData] = useState<FormData>({
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    address: '',
-    phoneNumber: '',
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { loading, error } = useAppSelector((state: RootState) => state.user);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const handleSubmit = async (values: CustomerFormValues) => {
+    // Debug log
+    console.log('Form values received:', values);
+    
+    const registerData = {
+      username: values.username,
+      email: values.email, // Make sure this matches your Form.Item name
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: values.phone,
+      role: UserRole.CUSTOMER,
+    };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-  
+    // Debug log
+    console.log('Sending registration data:', registerData);
+
     try {
-      console.log('Submitting form data:', formData);
-      const response = await axios.post('/api/signup', formData);
-      console.log('Signup response:', response.data);
+      const result = await dispatch(registerUser(registerData)).unwrap();
+      console.log('Registration successful:', result);
       router.push('/home');
     } catch (err) {
-      console.error('Signup error:', err);
-      setError('Signup failed. Please try again.');
-    } finally {
-      setIsLoading(false);
+      console.error('Registration failed:', err);
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-      <input
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        placeholder="Username"
-        className="w-full p-2 text-white placeholder-white border border-black bg-transparent rounded focus:outline-none focus:ring-2 focus:ring-black"
-        required
-      />
-      <input
-        type="text"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        placeholder="First Name"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 bg-transparent rounded focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
-      <input
-        type="text"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        placeholder="Last Name"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Email"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Password"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
-      <input
-        type="text"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-        placeholder="Address"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
-      <input
-        type="text"
-        name="phoneNumber"
-        value={formData.phoneNumber}
-        onChange={handleChange}
-        placeholder="Phone number"
-        className="w-full p-2 text-white placeholder-white border border-gray-100 rounded bg-transparent focus:outline-none focus:ring-2 focus:ring-mint"
-        required
-      />
+  // Your existing theme configuration
+  const transparentTheme = {
+    // ... keep your existing theme configuration
+  };
 
-      <button 
-        type="submit"
-        disabled={isLoading}
-        className="w-full p-2 text-white bg-raspberry rounded hover:bg-lightMint disabled:opacity-50"
+  return (
+    <ConfigProvider theme={transparentTheme}>
+      <Form 
+        form={form}
+        onFinish={handleSubmit} 
+        className="space-y-6"
+        layout='vertical'
       >
-        {isLoading ? 'Signing up...' : 'Sign Up'}
-      </button>
-    </form>
+      <h2 className="text-xl font-semibold">Create Account</h2>
+      <p className="text-sm text-gray-500 mt-1">Please provide your information</p>
+      
+        <Form.Item
+          name="username"
+          rules={[{ required: true, message: 'Username is required' }]}
+        >
+          <Input placeholder="Username" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="email"
+          rules={[
+            { required: true, message: 'Email is required' },
+            { type: 'email', message: 'Please enter a valid email' }
+          ]}
+        >
+          <Input placeholder="Email" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="firstName"
+          rules={[{ required: true, message: 'First name is required' }]}
+        >
+          <Input placeholder="First Name" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="lastName"
+          rules={[{ required: true, message: 'Last name is required' }]}
+        >
+          <Input placeholder="Last Name" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="phone"
+          rules={[{ required: true, message: 'Phone number is required' }]}
+        >
+          <Input placeholder="Phone Number" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="password"
+          rules={[
+            { required: true, message: 'Password is required' },
+            { min: 6, message: 'Password must be at least 6 characters' }
+          ]}
+          hasFeedback
+        >
+          <Input.Password placeholder="Password" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+
+        <Form.Item
+          name="confirmPassword"
+          dependencies={['password']}
+          rules={[
+            { required: true, message: 'Please confirm your password' },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('Passwords do not match'));
+              },
+            }),
+          ]}
+          hasFeedback
+        >
+          <Input.Password placeholder="Confirm Password" className="bg-transparent border-b border-gray-300" />
+        </Form.Item>
+      
+
+      {error && (
+        <div className="text-red-500 text-sm mt-4">
+          {typeof error === 'string' ? error : 'Registration failed. Please try again.'}
+        </div>
+      )}
+
+      <Form.Item className="mt-6">
+        <button 
+          type="submit"
+          disabled={loading}
+          className="w-full p-3 text-white bg-raspberry rounded-lg hover:bg-lightMint 
+                    transition-colors duration-200 disabled:opacity-50"
+        >
+          {loading ? 'Creating Account...' : 'Create Account'}
+        </button>
+      </Form.Item>
+        
+      </Form>
+    </ConfigProvider>
   );
 };
 
-export default SignupForm;
+export default CustomerSignupForm;

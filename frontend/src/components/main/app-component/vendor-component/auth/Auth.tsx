@@ -10,19 +10,7 @@ const VendorAuthPage: React.FC = () => {
     setIsLogin(!isLogin);
   };
 
-  const handleLoginSubmit = (formData: { email: string; password: string }) => {
-    // Handle login logic here
-    console.log('Login data:', formData);
-  };
-
-  const handleSignupSubmit = (formData: {
-    username: string;
-    email: string;
-    password: string;
-  }) => {
-    // Handle signup logic here
-    console.log('Signup data:', formData);
-  };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-mint-raspberry">
@@ -40,7 +28,7 @@ const VendorAuthPage: React.FC = () => {
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.5 }}
             >
-              <VendorLoginForm onSubmit={handleLoginSubmit} />
+              <VendorLoginForm />
             </motion.div>
           ) : (
             <motion.div
@@ -50,7 +38,7 @@ const VendorAuthPage: React.FC = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
             >
-              <VendorSignupForm onSubmit={handleSignupSubmit} />
+              <VendorSignupForm />
             </motion.div>
           )}
         </AnimatePresence>
