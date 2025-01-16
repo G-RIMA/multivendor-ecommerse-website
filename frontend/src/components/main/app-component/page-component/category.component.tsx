@@ -84,11 +84,11 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, subcategory }) =>
         <div className="flex gap-6">
           {/* Filters Sidebar */}
           <div className={`
-            fixed md:relative top-0 left-0 h-full w-80 bg-white z-100 
+            bg-mint fixed md:relative top-0 left-0 h-full w-80 bg-white z-100 
             transform transition-transform duration-300 ease-in-out
             ${showFilters ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
           `}>
-            <div className="p-4 border rounded-lg bg-mint shadow-lg">
+            <div className="p-4 border bg-mint shadow-xl rounded-2xl">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="font-semibold">Filters</h2>
                 <button 
