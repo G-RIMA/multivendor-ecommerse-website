@@ -2,6 +2,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { ApiResponse, ErrorResponse } from '../../types/api.types';
 
+
 class Api {
   private instance: AxiosInstance;
   

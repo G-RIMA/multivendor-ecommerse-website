@@ -1,7 +1,7 @@
 // components/Layout.tsx
 import React from 'react';
 import HeadComponent from './Header';
-import Header from './home/header.component';
+import Header from './main/navigation/header.component';
 
 interface LayoutProps {
   children: React.ReactNode;
