@@ -12,7 +12,6 @@ import DealProductSection from './items/topdeals.banner.component';
 import Categories from './items/category-items.component';
 import TopDealSection from './items/topdeals.banner.component';
 import TopCategories from './items/product.categories.component';
-import Header from './header.component';
 import HeadComponent from '../Header';
 
 const HomePage: React.FC = () => {
@@ -20,7 +19,7 @@ const HomePage: React.FC = () => {
     <div className="min-h-screen bg-gradient-mint-raspberry">
       <>
        <HeadComponent/>
-       <Header/>
+       
       </>
 
       <main className="container mx-auto px-4 py-8">

@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
-import MegaMenu from './components/megamenu.component';
+import MegaMenu from '../../home/components/megamenu.component';
 import Link from 'next/link';
-import AccountDropdown from './account-drop.component';
+import AccountDropdown from '../../home/account-drop.component';
 
 const Header: React.FC = () => {
   return (
-    <header className="shadow">
+    <header className="shadow bg-mint">
     <div className="container mx-auto px-4 py-4">
       <div className="flex items-center justify-between">
         <div className="flex  space-x-4">
