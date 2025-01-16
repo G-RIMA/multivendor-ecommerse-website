@@ -88,7 +88,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, subcategory }) =>
             transform transition-transform duration-300 ease-in-out
             ${showFilters ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
           `}>
-            <div className="p-4 border rounded-lg bg-mint">
+            <div className="p-4 border rounded-lg bg-mint shadow-lg">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="font-semibold">Filters</h2>
                 <button 
