@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { ChevronDown, X, Heart } from 'lucide-react';
+import { mockProducts } from '@/components/products/homestuff.component';
 
 interface Product {
   id: number;
@@ -48,20 +49,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, subcategory }) =>
   ];
 
   // Sample products - these would come from your backend
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Summer Fashion Dress",
-      price: 1499,
-      originalPrice: 2999,
-      discount: 50,
-      image: "/api/placeholder/300/400",
-      rating: 4.5,
-      reviews: 128,
-      badge: "Sale"
-    },
-    // Add more sample products
-  ];
+  const [products] = useState(mockProducts);
 
   return (
     <div className="min-h-screen bg-mint">
@@ -144,17 +132,17 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ category, subcategory }) =>
 
             {/* Products Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {products.map((product) => (
-                <div key={product.id} className="bg-white border rounded-lg p-2 hover:shadow-lg transition-shadow">
-                  <div className="relative">
+              {mockProducts.map((product) => (
+                <div key={product.id} className="bg-white border rounded-lg p-2 hover:shadow-lg transition-shadow" onClick={() => router.push(`/products/${product.id}`)}>
+                  <div className="relative" onClick={() => console.log('Clicked product ID:', product.id)}>
                     {product.badge && (
                       <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
                         {product.badge}
                       </span>
                     )}
                     <img
-                      src={product.image}
-                      alt={product.name}
+                      src={product.images[0].url}
+                      alt={product.images[0].alt}
                       className="w-full aspect-square object-cover rounded"
                     />
                     <button className="absolute top-2 right-2 p-1 bg-white rounded-full shadow">
