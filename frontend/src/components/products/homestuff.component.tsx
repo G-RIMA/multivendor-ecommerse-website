@@ -1,105 +1,142 @@
-import React from 'react';
-import ProductGrid from '@/components/products/product-grid.component';
+// src/mock/products.ts
 
-const products = [
+export interface ProductImage {
+  id: string;
+  url: string;
+  alt: string;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  description: string;
+  brand: string;
+  category: string;
+  subcategory: string;
+  sku: string;
+  stock: number;
+  images: ProductImage[];
+  specifications: Record<string, string>;
+  rating: number;
+  reviewCount: number;
+  seller: {
+    name: string;
+    rating: number;
+    responseRate: number;
+    id: string;
+  };
+  badge?: string;
+  isOfficial?: boolean;
+}
+
+export const mockProducts: Product[] = [
   {
-    id: '1',
-    name: '6pcs set Shower Caddy',
-    price: 5850,
-    image: 'https://link-to-image.com/shower-caddy.jpg',
-    discount: 2700,
-    isExpress: true,
+    id: "prod-001",
+    name: "Samsung Galaxy A54",
+    price: 45999,
+    originalPrice: 52999,
+    discount: 13,
+    description: "Experience next-level technology with the Samsung Galaxy A54. Features include a stunning 6.4-inch Super AMOLED display, powerful 5G capability, and a versatile triple camera system.",
+    brand: "Samsung",
+    category: "Electronics",
+    subcategory: "Smartphones",
+    sku: "SAM-A54-128-BLK",
+    stock: 45,
+    images: [
+      { id: "img1", url: "/api/placeholder/400/400", alt: "Samsung Galaxy A54 Front View" },
+      { id: "img2", url: "/api/placeholder/400/400", alt: "Samsung Galaxy A54 Back View" },
+      { id: "img3", url: "/api/placeholder/400/400", alt: "Samsung Galaxy A54 Side View" }
+    ],
+    specifications: {
+      "Display": "6.4-inch Super AMOLED",
+      "RAM": "8GB",
+      "Storage": "128GB",
+      "Battery": "5000mAh",
+      "Camera": "50MP + 12MP + 5MP",
+      "Processor": "Exynos 1380"
+    },
+    rating: 4.5,
+    reviewCount: 128,
+    seller: {
+      name: "Samsung Official Store",
+      rating: 4.8,
+      responseRate: 98,
+      id: "seller-samsung"
+    },
+    badge: "Official Store",
+    isOfficial: true
   },
   {
-    id: '2',
-    name: 'Pointed Flat Bottom Pumps',
-    price: 2736,
-    image: 'https://link-to-image.com/pumps.jpg',
-    isExpress: false,
+    id: "prod-002",
+    name: "Nike Air Max 270",
+    price: 12999,
+    originalPrice: 15999,
+    discount: 19,
+    description: "Step into comfort with Nike Air Max 270. These iconic sneakers feature Nike's largest Air unit yet in the heel for ultimate cushioning.",
+    brand: "Nike",
+    category: "Fashion",
+    subcategory: "Footwear",
+    sku: "NIKE-AM270-BLK-42",
+    stock: 25,
+    images: [
+      { id: "img1", url: "/api/placeholder/400/400", alt: "Nike Air Max 270 Side View" },
+      { id: "img2", url: "/api/placeholder/400/400", alt: "Nike Air Max 270 Top View" },
+      { id: "img3", url: "/api/placeholder/400/400", alt: "Nike Air Max 270 Back View" }
+    ],
+    specifications: {
+      "Size Range": "40-45 EU",
+      "Material": "Mesh and Synthetic",
+      "Sole": "Air Max Unit",
+      "Style": "Casual/Athletic",
+      "Closure": "Lace-up"
+    },
+    rating: 4.7,
+    reviewCount: 256,
+    seller: {
+      name: "Nike Official Store",
+      rating: 4.9,
+      responseRate: 99,
+      id: "seller-nike"
+    },
+    badge: "Bestseller",
+    isOfficial: true
   },
   {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  {
-    id: '3',
-    name: '500ml Aroma Diffuser',
-    price: 1800,
-    image: 'https://link-to-image.com/aroma-diffuser.jpg',
-    discount: 600,
-    isExpress: true,
-  },
-  // Add more products as needed
+    id: "prod-003",
+    name: "Xiaomi Smart TV X50",
+    price: 32999,
+    originalPrice: 39999,
+    discount: 18,
+    description: "Transform your entertainment with the Xiaomi Smart TV X50. Featuring a 4K HDR display, Android TV, and built-in Chromecast.",
+    brand: "Xiaomi",
+    category: "Electronics",
+    subcategory: "TVs",
+    sku: "MI-TV-X50-4K",
+    stock: 15,
+    images: [
+      { id: "img1", url: "/api/placeholder/400/400", alt: "Xiaomi TV Front View" },
+      { id: "img2", url: "/api/placeholder/400/400", alt: "Xiaomi TV Angle View" },
+      { id: "img3", url: "/api/placeholder/400/400", alt: "Xiaomi TV Ports View" }
+    ],
+    specifications: {
+      "Screen Size": "50 inches",
+      "Resolution": "4K Ultra HD",
+      "Smart Features": "Android TV",
+      "Connectivity": "WiFi, Bluetooth",
+      "Ports": "3 HDMI, 2 USB"
+    },
+    rating: 4.4,
+    reviewCount: 89,
+    seller: {
+      name: "Xiaomi Kenya",
+      rating: 4.6,
+      responseRate: 95,
+      id: "seller-xiaomi"
+    },
+    badge: "Hot Deal",
+    isOfficial: true
+  }
 ];
-
-const HomeStuff: React.FC = () => {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-4">
-        <div>
-          <h1 className="text-2xl font-bold">Home & Kitchen Products</h1>
-          <p className="text-sm text-gray-600">({products.length} products found)</p>
-        </div>
-        <div>
-          <label htmlFor="sort" className="mr-2">Sort by:</label>
-          <select id="sort" className="border border-gray-300 p-2 rounded">
-            <option value="popularity">Popularity</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
-        </div>
-      </div>
-      <div className="flex space-x-2 mb-6">
-        <button className="bg-orange-500 text-white px-4 py-2 rounded flex items-center">
-          <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3-3 3 3M8 15l3 3 3-3" />
-          </svg>
-          EXPRESS
-        </button>
-        <button className="border border-gray-300 px-4 py-2 rounded">Shipped from Kenya</button>
-        <button className="border border-gray-300 px-4 py-2 rounded">Brand</button>
-        <button className="border border-gray-300 px-4 py-2 rounded">Price</button>
-      </div>
-      
-      <ProductGrid products={products} />
-    </div>
-  );
-};
-
-export default HomeStuff;
